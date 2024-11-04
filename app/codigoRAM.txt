@@ -56,3 +56,55 @@
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+de igual forma ahora dame un torial que mediante largaron con larval y sql me digas como agregar paso a paso a mi proyecto llamado control_escolar que por el momento consta de crud materias, crear un nuevo crud de usuarios, que muestre una tabla ubicada en usuarios\index.blade 
+columna 1: clave (usuarios.id_usuario)
+columna 2: nombre (usuarios.nombre)
+columna 3: email (usuarios.email)
+columna 4: rol (usuarios.rol)
+Columna 5: *en esta columna debe estar un logo de un lápiz que en cada registro que servira para desplegar una vista que al estili de la psada (<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Editar Materia</h2>
+    <form action="{{ route('materias.update', $materia->id_materia) }}" method="POST">
+        @csrf
+        @method('PUT')
+
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" name="nombre" value="{{ $materia->nombre }}">
+        </div>
+
+        <div class="mb-3">
+            <label for="credito" class="form-label">Créditos</label>
+            <input type="number" class="form-control" name="credito" value="{{ $materia->credito }}">
+        </div>
+
+        <button type="submit" class="btn btn-success">Guardar Cambios</button>
+    </form>
+</div>
+
+</body>
+</html>) acceda a una vista en este caso llamada usuarios\edit.blade conteniendo un ecuadro de edicion de registro donde podremos editar los campos (usuarios.id_usuarios, usuarios.nombre, usuarios.email, usuarios.rol (un menú con opcion Administrador, Profesor Alumno en base de datos siendo el correspondiente a 1,2,3 de la columna rol), usuarios.contrasena)
+
+Columna 6: *en esta columna estaba un logo de cesto de basura en cada registro que servirá para borrar un registro
+De igual forma  deberá haber un único botón fuera de la tabla para agregar un nuevo usuario, desplegando un recuadro para capturar sus datos (id_usuarios, usuarios.nombre, usuarios.email, usuarios.rol, usuarios.contrasena) y asi agregarlos a la db
+Crea la migración para una tabla en una db que tenga [nombre de la tabla: Materias
+pk id_materia 
+nombre
+credito
+] seeder que lo rellene id_materia debe ser una clave de 6 dijimos para el seeder nombre debe ser nombres de materias impartidas en carreras de universidad de ingeniería en sistemas inteligentes uaslp y créditos varia entre 8 y 2 créditos haz un tutorial simple paso a paso incluso sentencias php complejas explicalas si las. consideras necesario has que sea fácil de leer
