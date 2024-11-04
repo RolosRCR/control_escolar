@@ -19,12 +19,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('materias.index') }}">Materias</a>
                     </li>
-                    <li class="nav-item">
-                        <a>Materias</a>
-                    </li>
-
-
-
+                    
 
                 </ul>
             </div>
