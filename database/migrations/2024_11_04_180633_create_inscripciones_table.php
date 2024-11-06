@@ -16,9 +16,11 @@ class CreateInscripcionesTable extends Migration
             $table->integer('parcial_dos')->nullable();
             $table->integer('parcial_tres')->nullable();
             $table->integer('parcial_cuatro')->nullable();
+            
+            $table->boolean('estado')->default(false); 
+
             $table->timestamps();
 
-            // Foreign keys
             $table->foreign('id_curso')->references('id_curso')->on('cursos')->onDelete('cascade');
             $table->foreign('id_alumno')->references('id_usuario')->on('usuarios')->where('rol', 3)->onDelete('cascade');
         });
@@ -29,4 +31,3 @@ class CreateInscripcionesTable extends Migration
         Schema::dropIfExists('inscripciones');
     }
 }
-

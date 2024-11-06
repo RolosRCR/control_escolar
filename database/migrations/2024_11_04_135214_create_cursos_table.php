@@ -12,8 +12,9 @@ class CreateCursosTable extends Migration
         $table->id('id_curso');
         $table->unsignedBigInteger('id_materia');
         $table->unsignedBigInteger('id_profesor');
-        $table->dateTime('inicio'); 
-        $table->dateTime('fin');    
+        $table->Time('inicio'); 
+        $table->Time('fin');    
+        
         $table->timestamps();
 
         $table->foreign('id_materia')->references('id_materia')->on('materias')->onDelete('cascade');

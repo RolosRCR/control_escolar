@@ -19,6 +19,10 @@
                     <th>ID</th>
                     <th>Curso</th>
                     <th>Alumno</th>
+
+
+                    <th>Estado</th>
+
                     <th>Parcial 1</th>
                     <th>Parcial 2</th>
                     <th>Parcial 3</th>
@@ -33,15 +37,21 @@
                         <td>{{ $inscripcion->id_inscripcion }}</td>
                         <td>{{ $inscripcion->curso->id_curso }}</td>
                         <td>{{ $inscripcion->alumno->nombre }}</td>
+
+                        <td>
+                            {{ $inscripcion->estado == 0 ? 'No aprobado' : 'Aprobado' }}
+                        </td>
+
+
                         <td>{{ $inscripcion->parcial_uno }}</td>
                         <td>{{ $inscripcion->parcial_dos }}</td>
                         <td>{{ $inscripcion->parcial_tres }}</td>
                         <td>{{ $inscripcion->parcial_cuatro }}</td>
-                        
+
                         <td>
                             <a href="{{ route('inscripciones.edit', $inscripcion) }}">✏️</a>
                         </td>
-                        
+
                         <td>
                             <form action="{{ route('inscripciones.destroy', $inscripcion->id_inscripcion) }}" method="POST">
                                 @csrf
