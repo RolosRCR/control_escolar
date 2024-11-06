@@ -19,6 +19,15 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('materias.index') }}">Materias</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('usuarios.index') }}">Usuarios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('cursos.index') }}">Cursos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('inscripciones.index') }}">Inscripciones</a>
+                    </li>
                     
 
                 </ul>

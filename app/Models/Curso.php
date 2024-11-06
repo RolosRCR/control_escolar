@@ -21,22 +21,22 @@ class Curso extends Model
 
     // Campos que son asignables en masa
     protected $fillable = [
-        'id_curso',   // Incluye la clave primaria si es necesaria
+        'id_curso',   
         'id_materia',
-        'id_profesor', // Aquí se refiere a 'id' de la tabla usuarios
+        'id_profesor', 
         'inicio',
         'fin',
     ];
 
-    // Definir la relación con el modelo Materia
     public function materia()
     {
         return $this->belongsTo(Materia::class, 'id_materia');
     }
 
-    // Definir la relación con el modelo Usuario (en este caso como Profesor)
     public function profesor()
     {
         return $this->belongsTo(Usuario::class, 'id_profesor')->where('rol', 2);
     }
+
+    
 }
