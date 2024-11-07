@@ -26,12 +26,13 @@
             @csrf
             @method('PUT')
 
+
             <div class="mb-3">
                 <label for="id_curso" class="form-label">Curso</label>
                 <select name="id_curso" class="form-control">
                     <option value="">Seleccione un curso</option>
                     @foreach($cursos as $curso)
-                        <option value="{{ $curso->id_curso }}" {{ $curso->id_curso == $cursoActual->id_curso ? 'selected' : '' }}>
+                        <option value="{{ $curso->id_curso }}" {{ $curso->id_curso == $inscripcion->id_curso ? 'selected' : '' }}>
                             {{ $curso->id_curso }} - {{ $curso->materia->nombre }}
                         </option>
                     @endforeach
@@ -43,29 +44,20 @@
                 <label for="id_alumno" class="form-label">Alumno</label>
                 <select name="id_alumno" class="form-control">
                     @foreach($alumnos as $alumno)
-                    <option value="{{ $alumno->id_usuario }}">
+                        <option value="{{ $alumno->id_usuario }}">
                             {{ $alumno->id_usuario }} - {{ $alumno->nombre }}
                         </option>
                     @endforeach
                 </select>
             </div>
 
-            <!-- <div class="mb-3">
-                <label for="id_alumno" class="form-label">Alumno</label>
-                <select name="id_alumno" id="id_alumno" class="form-control">
-                    <option value="">Seleccione un alumno</option>
-                    @foreach($alumnos as $alumno)
-                        <option value="{{ $alumno->id_usuario }}">
-                            {{ $alumno->id_usuario }} - {{ $alumno->nombre }}
-                        </option>
-
-                    @endforeach
+            <div class="mb-3">
+                <label for="estado" class="form-label">Estado de la Inscripción</label>
+                <select name="estado" class="form-control">
+                    <option value="0" {{ $inscripcion->estado == 0 ? 'selected' : '' }}>No aprobado</option>
+                    <option value="1" {{ $inscripcion->estado == 1 ? 'selected' : '' }}>Aprobado</option>
                 </select>
-            </div> -->
-
-
-
-
+            </div>
 
 
 

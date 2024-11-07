@@ -22,20 +22,21 @@ class InscripcionController extends Controller
         return view('inscripciones.new', compact('cursos', 'alumnos'));
     }
 
-    // Ejemplo de validación en el método de almacenamiento en el controlador
     public function store(Request $request)
     {
         
         $validatedData = $request->validate([
             'id_curso' => 'required|exists:cursos,id_curso',
             'id_alumno' => 'required|exists:usuarios,id_usuario',
+            //'estado' => 'required|in:0,1',  
             'parcial_uno' => 'nullable|numeric',
             'parcial_dos' => 'nullable|numeric',
             'parcial_tres' => 'nullable|numeric',
             'parcial_cuatro' => 'nullable|numeric',
+            
         ]);
 
-        //dd(vars: $request);
+        
 
         Inscripcion::create($validatedData);
 
@@ -50,22 +51,23 @@ class InscripcionController extends Controller
         $cursos = Curso::all();
         $alumnos = Usuario::where('rol', 3)->get();
         // Obtener el curso actual de la inscripción
-        $cursoActual = $inscripcion->curso; // Asegúrate de que 'curso' es el nombre de la relación
-        return view('inscripciones.edit', compact('inscripcion', 'cursos', 'alumnos', 'cursoActual'));
+        
+        return view('inscripciones.edit', compact('inscripcion', 'cursos', 'alumnos'));
     }
 
     public function update(Request $request, Inscripcion $inscripcion)
     {
-      //  dd($inscripcion);
+        
         $request->validate([
             'id_curso' => 'required|exists:cursos,id_curso',
             'id_alumno' => 'required|exists:usuarios,id_usuario',
+            'estado' => 'required|in:0,1', 
             'parcial_uno' => 'nullable|integer',
             'parcial_dos' => 'nullable|integer',
             'parcial_tres' => 'nullable|integer',
             'parcial_cuatro' => 'nullable|integer',
         ]);
-
+        //dd($request);
         $inscripcion->update($request->all());
 
         return redirect()->route('inscripciones.index')->with('success', 'Inscripción actualizada exitosamente.');

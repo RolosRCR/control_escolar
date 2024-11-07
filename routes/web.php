@@ -7,7 +7,7 @@ use App\Http\Controllers\CursoController;
 use App\Http\Controllers\InscripcionController;
 
 use App\Models\Materia;
-
+/*
 Route::get('/', function () {
     // Obtener todas las materias
     $materias = Materia::all(); // Cambia según tu lógica
@@ -16,12 +16,21 @@ Route::get('/', function () {
     return view('materias', compact('materias'));
 });
 
-
+*/
 // Route::get('/', function () {
-//     return view('materias\index'); // Cambia 'materias' por el nombre de tu vista
+//     return view('materias\index'); // 
 // });
 
 
+Route::get('/', function () {
+    return redirect()->route('login');
+});
+
+//Ruta para mostrar el formde inicio de sesion
+Route::get('/login', [UsuarioController::class, 'showLoginForm'])->name('login');
+
+// Ruta para procesar el form de inicio de sesion
+Route::post('/login', [UsuarioController::class, 'login'])->name('login.post');
 
 Route::resource('materias', MateriaController::class);
 Route::post('/materias', [MateriaController::class, 'store'])->name('materias.store');
