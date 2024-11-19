@@ -28,11 +28,15 @@
                 </select>
             </div>
 
+            
+
+
+
+            @if(session('rol') != 2)
+
+        
             <div class="mb-3">
                 <label for="id_profesor" class="form-label">Profesor</label>
-
-
-
                 <select name="id_profesor" class="form-select">
                     @foreach($profesores as $profesor)
                         <option value="{{ $profesor->id_usuario }}" {{ $curso->id_profesor == $profesor->id_usuario ? 'selected' : '' }}>
@@ -40,11 +44,20 @@
                         </option>
                     @endforeach
                 </select>
-
-
-
-
             </div>
+
+
+
+
+
+            
+            @else
+                <input type="hidden" name="id_profesor" value="{{ session('id') }}">
+            @endif
+
+
+
+
 
             <div class="mb-3">
                 <label for="inicio" class="form-label">Hora de Inicio</label>

@@ -13,9 +13,19 @@ class CursoController extends Controller
 
     public function index()
     {
-        // Cargar cursos con las relaciones 'materia' y 'profesor'
-        $cursos = Curso::with(['materia', 'profesor'])->get();
+        $rol = session('rol');
+
+        if ($rol == 1) {
+            $cursos = Curso::with(['materia', 'profesor'])->get();
+    
+        } elseif ($rol == 2) {
+            $cursos = Curso::with(['materia', 'profesor'])
+                ->where('Id_profesor', session('id'))
+                ->get();
+        }
+    
         return view('cursos.index', compact('cursos'));
+
     }
 
 

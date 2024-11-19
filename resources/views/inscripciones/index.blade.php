@@ -21,14 +21,16 @@
                     <th>Alumno</th>
 
 
-                    <th>Estado</th>
+                    <th>Estado de solicitud</th>
 
                     <th>Parcial 1</th>
                     <th>Parcial 2</th>
                     <th>Parcial 3</th>
                     <th>Parcial 4</th>
-                    <th>Editar</th>
-                    <th>Eliminar</th>
+                    @if(session('rol') == 1 || session('rol') == 2)
+                        <th>Editar</th>
+                        <th>Eliminar</th>
+                    @endif
                 </tr>
             </thead>
             <tbody>
@@ -36,10 +38,10 @@
                     <tr>
                         <td>{{ $inscripcion->id_inscripcion }}</td>
                         <td>{{ $inscripcion->curso->id_curso }}</td>
-                        <td>{{ $inscripcion->alumno->nombre }}</td>
+                        <td>{{ $inscripcion->alumno ? $inscripcion->alumno->nombre : 'Alumno no asignado' }}</td>
 
                         <td>
-                            {{ $inscripcion->estado == 0 ? 'No aprobado' : 'Aprobado' }}
+                            {{ $inscripcion->estado == 0 ? 'No aprobada' : 'Aprobada' }}
                         </td>
 
 
@@ -48,17 +50,24 @@
                         <td>{{ $inscripcion->parcial_tres }}</td>
                         <td>{{ $inscripcion->parcial_cuatro }}</td>
 
-                        <td>
-                            <a href="{{ route('inscripciones.edit', $inscripcion) }}">✏️</a>
-                        </td>
 
-                        <td>
-                            <form action="{{ route('inscripciones.destroy', $inscripcion->id_inscripcion) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger">🗑️</button>
-                            </form>
-                        </td>
+                        @if(session('rol') == 1 || session('rol') == 2)
+
+                            <td>
+                                <a href="{{ route('inscripciones.edit', $inscripcion) }}">✏️</a>
+                            </td>
+
+                            <td>
+                                <form action="{{ route('inscripciones.destroy', $inscripcion->id_inscripcion) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger">🗑️</button>
+                                </form>
+                            </td>
+
+                        @endif
+
+
                     </tr>
                 @endforeach
             </tbody>

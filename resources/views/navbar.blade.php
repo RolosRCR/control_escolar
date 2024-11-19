@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Control Escolar</title>
 </head>
 
 <body>
@@ -13,24 +14,33 @@
             <a class="navbar-brand" href="#">Control escolar</a>
 
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav me-auto">
+                    @if(session('rol') == 1)
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('usuarios.index') }}">Usuarios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('materias.index') }}">Materias</a>
+                        </li>
+                    @endif
 
+                    @if(session('rol') == 1 || session('rol') == 2)
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('cursos.index') }}">Cursos</a>
+                        </li>
+                    @endif
+
+                    @if(session('rol') == 1 || session('rol') == 2 || session('rol') == 3)
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('inscripciones.index') }}">Inscripciones</a>
+                        </li>
+                    @endif
+                </ul>
+                
+                <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('usuarios.index') }}">Usuarios</a>
+                        <button class="btn btn-danger" onclick="window.location.href='{{ route('login') }}'">Salir</button>
                     </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('materias.index') }}">Materias</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('cursos.index') }}">Cursos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('inscripciones.index') }}">Inscripciones</a>
-                    </li>
-
-
                 </ul>
             </div>
         </nav>

@@ -11,8 +11,34 @@ class InscripcionController extends Controller
 {
     public function index()
     {
-        $inscripciones = Inscripcion::with(['curso', 'alumno'])->get();
+
+
+        $rol = session('rol');
+
+        if ($rol == 1) {
+            $inscripciones = Inscripcion::with(['curso', 'alumno'])->get();
+        } elseif ($rol == 2) {
+
+            $inscripciones = Inscripcion::with(['curso', 'alumno'])
+                ->whereHas('curso', function ($query) {
+                    $query->where('Id_profesor', session('id'));
+                })
+                ->get();
+
+
+
+        } elseif ($rol == 3) {
+            $inscripciones = Inscripcion::with(['curso', 'alumno'])
+                ->where('Id_alumno', session('id'))
+                ->get();
+
+        }
+
+
         return view('inscripciones.index', compact('inscripciones'));
+
+
+
     }
 
     public function create()
@@ -24,7 +50,7 @@ class InscripcionController extends Controller
 
     public function store(Request $request)
     {
-        
+
         $validatedData = $request->validate([
             'id_curso' => 'required|exists:cursos,id_curso',
             'id_alumno' => 'required|exists:usuarios,id_usuario',
@@ -33,10 +59,10 @@ class InscripcionController extends Controller
             'parcial_dos' => 'nullable|numeric',
             'parcial_tres' => 'nullable|numeric',
             'parcial_cuatro' => 'nullable|numeric',
-            
+
         ]);
 
-        
+
 
         Inscripcion::create($validatedData);
 
@@ -47,21 +73,21 @@ class InscripcionController extends Controller
 
     public function edit(Inscripcion $inscripcion)
     {
-        
+
         $cursos = Curso::all();
         $alumnos = Usuario::where('rol', 3)->get();
         // Obtener el curso actual de la inscripción
-        
+
         return view('inscripciones.edit', compact('inscripcion', 'cursos', 'alumnos'));
     }
 
     public function update(Request $request, Inscripcion $inscripcion)
     {
-        
+
         $request->validate([
             'id_curso' => 'required|exists:cursos,id_curso',
             'id_alumno' => 'required|exists:usuarios,id_usuario',
-            'estado' => 'required|in:0,1', 
+            'estado' => 'required|in:0,1',
             'parcial_uno' => 'nullable|integer',
             'parcial_dos' => 'nullable|integer',
             'parcial_tres' => 'nullable|integer',

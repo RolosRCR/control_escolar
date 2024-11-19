@@ -16,7 +16,6 @@ class UsuarioController extends Controller
     
     public function login(Request $request)
     {
-        // Validar los datos de entrada
         $request->validate([
             'id_usuario' => 'required|integer',
             'contrasena' => 'required|string',
@@ -30,12 +29,10 @@ class UsuarioController extends Controller
                 // Contraseña es correcta
                 //Auth::login($usuario);
                 session(['rol' => $usuario->rol]);
+                session(['id' => $usuario->id_usuario]);
 
-                // Imprimir en consola
-                error_log('Rol del usuario: ' . $usuario->rol);
-                //sleep(10);
-                if(session('rol') == 1){return redirect('/usuarios');}
-                else{return redirect('/libros');}
+                return redirect('/inscripciones');
+                
                 
             } else {
                 // Contraseña incorrecta

@@ -30,6 +30,10 @@
                 </select>
             </div>
 
+            
+
+
+            @if(session('rol') != 2)
             <div class="mb-3">
                 <label for="id_profesor" class="form-label">Clave de Profesor</label>
                 <select name="id_profesor" class="form-select" required>
@@ -38,7 +42,24 @@
                         <option value="{{ $profesor->id_usuario }}">{{ $profesor->nombre }}</option>
                     @endforeach
                 </select>
-            </div>
+            </div>    
+            
+            
+            @else
+                <input type="hidden" name="id_profesor" value="{{ session('id') }}">
+            @endif
+
+
+
+
+
+
+
+
+
+
+
+
 
             <div class="mb-3">
                 <label for="inicio" class="form-label">Hora de Inicio</label>
